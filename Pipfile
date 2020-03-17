@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+databases = {extras = ["sqlite"],version = "*"}
+pytest = "*"
+pytest-cov = "*"
+asynctest = "*"
+atomicwrites = "*"
+
+[packages]
+fastapi = "*"
+uvicorn = "*"
+alembic = "*"
+databases = {extras = ["postgresql"],version = "*"}
+python-dotenv = "*"
+
+[requires]
+python_version = "3.8"
