@@ -1,11 +1,28 @@
-from fastapi import FastAPI
-import database
+from fastapi import FastAPI, Depends
+from pydantic import BaseModel
+from sqlalchemy.orm import Session
+
+from app.domains.models import User
+from database import get_db
 
 api = FastAPI()
 
 
-@api.get('/')
-async def get():
-    return {
-        'hello': 'world'
-    }
+class UserResponse(BaseModel):
+    id: str
+    email: str
+
+    @classmethod
+    def from_domain(cls, user: User):
+        return UserResponse(
+            id=user.id,
+            email=user.email,
+        )
+
+
+@api.get('/users', response_model=UserResponse)
+async def get(
+        db: Session = Depends(get_db),
+):
+    first = db.query(User).first()
+    return UserResponse.from_domain(first)
