@@ -15,7 +15,6 @@ fastapi = "*"
 uvicorn = "*"
 alembic = "*"
 databases = {extras = ["postgresql"],version = "*"}
-python-dotenv = "*"
 
 [requires]
 python_version = "3.8"

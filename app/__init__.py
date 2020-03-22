@@ -26,3 +26,11 @@ async def get(
 ):
     first = db.query(User).first()
     return UserResponse.from_domain(first)
+
+
+@api.post('/users', response_model=UserResponse)
+async def post(
+        db: Session = Depends(get_db),
+):
+    first = db.query(User).first()
+    return UserResponse.from_domain(first)

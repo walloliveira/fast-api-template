@@ -1,16 +1,33 @@
 version: '3'
 services:
   database:
-    image: postgres:12.2-alpine
-    restart: always
+    image: postgres:12.1
+    restart: unless-stopped
     volumes:
-      - fastapidb:/var/lib/postgresql/data
+      - ./.database:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
       POSTGRES_USER: fastapi
-      POSTGRES_PASSWORD: 123mudar
       POSTGRES_DB: fastapi
-      TZ: America/Sao_Paulo
-volumes:
-  fastapidb:
+      POSTGRES_PASSWORD: 123mudar
+  app:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.dev
+    env_file: .env
+    depends_on:
+      - database
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app
+    entrypoint: ["sh", "/app/scripts/run-app.sh"]
+  app-test:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.dev
+    env_file: .env.testing
+    volumes:
+      - .:/app
+    entrypoint: ["sh", "/app/scripts/run-tests.sh"]

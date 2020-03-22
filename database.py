@@ -4,13 +4,13 @@ from sqlalchemy.orm import sessionmaker
 
 import settings
 
-database_url = settings.DATABASE_URL
+connection_uri = settings.CONNECTION_URI
 
 connect_args = {}
 
 if settings.API_TEST:
     connect_args.update({'check_same_thread': False})
-engine = sqlalchemy.create_engine(database_url, connect_args=connect_args)
+engine = sqlalchemy.create_engine(connection_uri, connect_args=connect_args)
 
 SessionLocal = sessionmaker(
     autocommit=False,
