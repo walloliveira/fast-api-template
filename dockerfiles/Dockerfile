@@ -1,5 +1,5 @@
 FROM python:3.8.2 as build-stage
-COPY ../ /app
+COPY . /app
 WORKDIR /app
 RUN apt update
 RUN apt install nginx -y
