@@ -22,7 +22,11 @@ services:
       - 5000:5000
     volumes:
       - .:/app
-    entrypoint: ["sh", "scripts/run-app.sh"]
+    entrypoint: [
+      "sh",
+      "-c",
+      "pipenv run alembic upgrade head | pipenv run uvicorn app:api --reload --host '0.0.0.0' --port '5000'"
+    ]
   app-test:
     build:
       context: .
