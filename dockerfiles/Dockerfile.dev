@@ -1,6 +1,5 @@
 FROM python:3.8.2 as build-stage
-COPY Pipfile /app/Pipfile
-COPY Pipfile.lock /app/Pipfile.lock
+COPY . /app
 WORKDIR /app
 RUN ls -la
 RUN pip install pipenv

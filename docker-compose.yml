@@ -22,7 +22,7 @@ services:
       - 5000:5000
     volumes:
       - .:/app
-    entrypoint: ["sh", "./scripts/run-app.sh"]
+    entrypoint: ["sh", "scripts/run-app.sh"]
   app-test:
     build:
       context: .
