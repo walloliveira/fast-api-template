@@ -22,7 +22,7 @@ services:
       - 5000:5000
     volumes:
       - .:/app
-    entrypoint: ["sh", "/app/scripts/run-app.sh"]
+    entrypoint: ["sh", "./scripts/run-app.sh"]
   app-test:
     build:
       context: .
@@ -30,4 +30,4 @@ services:
     env_file: .env.testing
     volumes:
       - .:/app
-    entrypoint: ["sh", "/app/scripts/run-tests.sh"]
+    entrypoint: ["sh", "/scripts/run-tests.sh"]
