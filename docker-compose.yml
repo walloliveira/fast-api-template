@@ -34,4 +34,4 @@ services:
     env_file: .env.testing
     volumes:
       - .:/app
-    entrypoint: ["sh", "/scripts/run-tests.sh"]
+    entrypoint: ["sh","-c", "pipenv run pytest --cov=app/ --cov-report=html"]
