@@ -1,5 +1,4 @@
 FROM python:3.8.2 as build-stage
-COPY . /app
 WORKDIR /app
 RUN ls -la
 RUN pip install pipenv
