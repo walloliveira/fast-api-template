@@ -15,9 +15,11 @@ logo para iniciar o desenvolvimento e necessario configurar a seguinte variavel 
 
 
 ## Executar - Desenvolvimento
-Abra o terminal, entre na pasta root do projeto e execute o seguinte comando:
+Abra o terminal, entre na pasta root do projeto e execute os seguintes comandos:
 
-`docker-compose up`
+`# docker-compose up -d database`
+
+`# docker-compose up app`
 
 ## Acessar
 Para acessar apenas abra o navegar e acesse: http://localhost:5000/docs
