@@ -9,6 +9,7 @@ pytest = "*"
 pytest-cov = "*"
 asynctest = "*"
 atomicwrites = "*"
+pytest-asyncio = "*"
 
 [packages]
 fastapi = "*"

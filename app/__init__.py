@@ -1,36 +1,12 @@
-from fastapi import FastAPI, Depends
-from pydantic import BaseModel
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
 
-from app.domains.models import User
-from database import get_db
+from app.arch.exceptions import HTTPException
+from app.arch.exceptions_handlers import handle_runtime_exception, handle_http_exception, \
+    handle_request_validation_error
 
 api = FastAPI()
 
-
-class UserResponse(BaseModel):
-    id: str
-    email: str
-
-    @classmethod
-    def from_domain(cls, user: User):
-        return UserResponse(
-            id=user.id,
-            email=user.email,
-        )
-
-
-@api.get('/users', response_model=UserResponse)
-async def get(
-        db: Session = Depends(get_db),
-):
-    first = db.query(User).first()
-    return UserResponse.from_domain(first)
-
-
-@api.post('/users', response_model=UserResponse)
-async def post(
-        db: Session = Depends(get_db),
-):
-    first = db.query(User).first()
-    return UserResponse.from_domain(first)
+api.add_exception_handler(Exception, handle_runtime_exception)
+api.add_exception_handler(HTTPException, handle_http_exception)
+api.add_exception_handler(RequestValidationError, handle_request_validation_error)
